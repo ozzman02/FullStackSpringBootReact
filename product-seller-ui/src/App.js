@@ -1,12 +1,14 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { NavigationBar } from "./components/navigation-bar";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AuthGuard from "./guards/auth-guard";
+import { Role } from "./models/role";
+import { AdminPage } from "./pages/admin/admin-page";
 import { HomePage } from "./pages/home/home-page";
 import { LoginPage } from "./pages/login/login-page";
-import { RegisterPage } from "./pages/register/register-page";
-import { ProfilePage } from "./pages/profile/profile-page";
-import { AdminPage } from "./pages/admin/admin-page";
 import { NotFoundPage } from "./pages/not-found/not-found-page";
+import { ProfilePage } from "./pages/profile/profile-page";
+import { RegisterPage } from "./pages/register/register-page";
 import { UnauthorizedPage } from "./pages/unauthorized/unauthorized-page";
 
 function App() {
@@ -19,8 +21,21 @@ function App() {
           <Route path="/home" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/admin" element={<AdminPage />} />
+          
+          <Route path="/profile" element={
+              <AuthGuard roles={[Role.ADMIN, Role.USER]}>
+                <ProfilePage />
+              </AuthGuard>
+            } 
+          />
+          
+          <Route path="/admin" element={
+              <AuthGuard roles={[Role.ADMIN]}>
+                <AdminPage />
+              </AuthGuard>
+            } 
+          />
+          
           <Route path="/404" element={<NotFoundPage />} />
           <Route path="/401" element={<UnauthorizedPage />} />
           <Route path="*" element={<NotFoundPage />} />
