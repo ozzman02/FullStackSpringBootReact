@@ -6,6 +6,9 @@ import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import store from './store';
+import { handleResponseWithLoginCheck } from './services/base-service';
+
+handleResponseWithLoginCheck();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
