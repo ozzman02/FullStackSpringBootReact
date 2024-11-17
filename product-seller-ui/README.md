@@ -34,6 +34,12 @@ React-Router-Dom
 npm install react-router-dom
 ```
 
+History
+
+```sh
+npm install --save history
+```
+
 Redux
 
 ```sh

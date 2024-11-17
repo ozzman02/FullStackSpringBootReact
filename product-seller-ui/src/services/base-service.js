@@ -3,6 +3,7 @@ import store from '../store';
 import { clearCurrentUser } from '../store/actions/user-actions';
 import { history } from '../commons/history';
 
+
 export const authorizationHeader = () => {
     
     const currentUser = store.getState().user;
@@ -20,7 +21,8 @@ export const authorizationHeader = () => {
 
     This function can be called from App.js or index.js
 */
-export const handleResponseWithLoginCheck = () => {
+export function handleResponseWithLoginCheck() {
+    
     axios.interceptors.response.use(
         response => response, 
         error => {
